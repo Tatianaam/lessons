@@ -1,6 +1,6 @@
 public class LinkedListExtra {
 
-    //returns null if length of two provided lists are not equal
+    //returns null if lengths of two provided lists are not equal
     public static LinkedList sumOfTwoLists(LinkedList one, LinkedList two) {
         LinkedList sum = new LinkedList();
         Node currentOne = one.head;
