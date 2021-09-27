@@ -32,7 +32,7 @@ public class LinkedList
     }
 
     public ArrayList<Node> findAll(int _value) {
-        ArrayList<Node> nodes = new ArrayList<Node>();
+        ArrayList<Node> nodes = new ArrayList<>();
         Node node = this.head;
         while (node != null) {
             if (node.value == _value)
@@ -130,6 +130,8 @@ public class LinkedList
         } else {
             _nodeToInsert.next = node;
             this.head = _nodeToInsert;
+            if (this.tail == null)
+                this.tail = _nodeToInsert;
         }
     }
 
