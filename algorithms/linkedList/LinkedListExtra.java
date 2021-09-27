@@ -1,10 +1,8 @@
-package com.company;
-
 public class LinkedListExtra {
 
     //returns null if length of two provided lists are not equal
     public static LinkedList sumOfTwoLists(LinkedList one, LinkedList two) {
-        LinkedList sum = null;
+        LinkedList sum = new LinkedList();
         Node currentOne = one.head;
         Node currentTwo = two.head;
         Node sumNode;
@@ -12,12 +10,10 @@ public class LinkedListExtra {
         while (currentOne != null) {
             if (currentTwo != null) {
                 sumNode = new Node(currentOne.value + currentTwo.value);
-                if (currentOne == one.head) {
-                    sum = new LinkedList();
+                if (currentOne == one.head)
                     sum.head = sumNode;
-                } else {
+                else
                     sum.tail.next = sumNode;
-                }
                 sum.tail = sumNode;
                 currentOne = currentOne.next;
                 currentTwo = currentTwo.next;
