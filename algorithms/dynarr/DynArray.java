@@ -80,6 +80,8 @@ public class DynArray<T>
     private void removeHelper(int index) {
         for (int i = index + 1; i < count; i++)
             array [i - 1] = array [i];
+
+        array [count - 1] = null;
     }
 
 }
