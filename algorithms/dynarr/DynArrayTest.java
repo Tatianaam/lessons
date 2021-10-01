@@ -147,6 +147,31 @@ public class DynArrayTest {
     }
 
     @Test
+    public void testRemoveSameBuffer(){
+        DynArray<Integer> array = new DynArray<Integer>(Integer.class);
+        array.makeArray(16);
+        array.append(3);
+        array.append(4);
+        array.append(5);
+        array.append(2);
+        array.append(1);
+        array.remove(0);
+        Assert.assertEquals(4, array.count);
+        Assert.assertEquals(16, array.capacity);
+        Assert.assertEquals((Integer) 1, array.getItem(3));
+        Assert.assertEquals((Integer) 4, array.getItem(0));
+        boolean thrown = false;
+        try {
+            Assert.assertEquals((Integer) 1, array.getItem(6));
+        } catch (Exception e) {
+            thrown = true;
+        }
+        //  array.getItem(2);
+        Assert.assertEquals(true, thrown);
+
+    }
+
+    @Test
     public void testRemoveSameBufferZero(){
         DynArray<Integer> array = new DynArray<Integer>(Integer.class);
         array.makeArray(16);
@@ -208,6 +233,21 @@ public class DynArrayTest {
         array.remove(0);
         Assert.assertEquals(30, array.count);
         Assert.assertEquals(32, array.capacity);
+        array.remove(0); array.remove(0); array.remove(0); array.remove(0); array.remove(0); array.remove(0); array.remove(0); array.remove(0); array.remove(0); array.remove(0); array.remove(0);array.remove(0);array.remove(0);
+        Assert.assertEquals(17, array.count);
+        Assert.assertEquals(32, array.capacity);
+        array.remove(0);
+        Assert.assertEquals(16, array.count);
+        Assert.assertEquals(32, array.capacity);
+        array.remove(0);
+        Assert.assertEquals(15, array.count);
+        Assert.assertEquals(21, array.capacity);
+        array.append(2);array.append(2);array.append(2);array.append(2);array.append(2);array.append(2);
+        Assert.assertEquals(21, array.count);
+        Assert.assertEquals(21, array.capacity);
+        array.append(1);
+        Assert.assertEquals(22, array.count);
+        Assert.assertEquals(42, array.capacity);
         Assert.assertEquals((Integer) 2, array.getItem(1));
         Assert.assertEquals((Integer) 2, array.getItem(0));
         boolean thrown = false;
@@ -225,16 +265,15 @@ public class DynArrayTest {
         array.makeArray(30);
         Assert.assertEquals(30, array.capacity);
         array.append(3); array.append(2); array.append(2); array.append(2); array.append(2); array.append(2); array.append(2); array.append(2);
-        array.append(3); array.append(2); array.append(2); array.append(2); array.append(2); array.append(2); array.append(2); array.append(2);
-        array.append(3); array.append(2); array.append(2); array.append(3); array.append(2);
-        array.remove(20);
-        Assert.assertEquals(20, array.count);
+        array.append(3); array.append(2); array.append(2); array.append(2); array.append(2); array.append(2); array.append(2);
+        array.remove(10);
+        Assert.assertEquals(14, array.count);
         Assert.assertEquals(20, array.capacity);
-        Assert.assertEquals((Integer) 3, array.getItem(19));
+        Assert.assertEquals((Integer) 2, array.getItem(13));
         Assert.assertEquals((Integer) 3, array.getItem(0));
         boolean thrown = false;
         try {
-            Assert.assertEquals((Integer) 1, array.getItem(20));
+            Assert.assertEquals((Integer) 1, array.getItem(14));
         } catch (Exception e) {
             thrown = true;
         }
@@ -250,9 +289,15 @@ public class DynArrayTest {
         array.append(3); array.append(2); array.append(3); array.append(2);
         array.remove(0);
         Assert.assertEquals(19, array.count);
+        Assert.assertEquals(30, array.capacity);
+        array.remove(0);array.remove(0);array.remove(0);array.remove(0);
+        Assert.assertEquals(15, array.count);
+        Assert.assertEquals(30, array.capacity);
+        array.remove(0);
+        Assert.assertEquals(14, array.count);
         Assert.assertEquals(20, array.capacity);
-        Assert.assertEquals((Integer) 2, array.getItem(18));
-        Assert.assertEquals((Integer) 3, array.getItem(17));
+        Assert.assertEquals((Integer) 2, array.getItem(13));
+        Assert.assertEquals((Integer) 3, array.getItem(12));
         Assert.assertEquals((Integer) 2, array.getItem(0));
         boolean thrown = false;
         try {
@@ -272,7 +317,7 @@ public class DynArrayTest {
         array.append(3); array.append(2); array.append(2); array.append(3); array.append(2);
         array.remove(2);
         Assert.assertEquals(20, array.count);
-        Assert.assertEquals(20, array.capacity);
+        Assert.assertEquals(30, array.capacity);
         Assert.assertEquals((Integer) 2, array.getItem(19));
         Assert.assertEquals((Integer) 3, array.getItem(18));
         Assert.assertEquals((Integer) 3, array.getItem(0));
@@ -350,6 +395,9 @@ public class DynArrayTest {
         array.append(3); array.append(2); array.append(2); array.append(3);
         Assert.assertEquals(40, array.capacity);
         array.remove(0);
+        Assert.assertEquals(40, array.capacity);
+        array.remove(0);
+        Assert.assertEquals(19, array.count);
         Assert.assertEquals(26, array.capacity);
     }
 
