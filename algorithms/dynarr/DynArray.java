@@ -1,7 +1,3 @@
-package com.company;
-
-import java.lang.reflect.Array;
-
 public class DynArray<T>
 {
     public T [] array;
@@ -75,10 +71,13 @@ public class DynArray<T>
 
         removeHelper(index);
 
-        if (((int)(capacity / 1.5) >= 16) && (count - 1 < capacity / 2) )
-            makeArray((int)(capacity / 1.5));
-
         count--;
+
+        if(count < capacity / 2)
+            if ((int)(capacity / 1.5) >= 16)
+                makeArray((int)(capacity / 1.5));
+            else
+                makeArray(16);
     }
 
     private void removeHelper(int index) {
