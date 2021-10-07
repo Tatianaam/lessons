@@ -18,11 +18,11 @@ public class Deque<T> {
     }
 
     public T removeFront() {
-        return list.removeFirst();
+        return list.size() == 0 ? null : list.removeFirst();
     }
 
     public T removeTail() {
-        return list.removeLast();
+        return list.size() == 0 ? null : list.removeLast();
     }
 
     public int size() {
