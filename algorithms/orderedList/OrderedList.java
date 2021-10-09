@@ -33,9 +33,8 @@ public class OrderedList<T> {
             else if (v1 == v2) result = 0;
             else result = 1;
         } else {
-            String temp1 = (String) v1;
-            String temp2 = (String) v2;
-            result = temp1.trim().compareTo(temp2.trim());
+            result = ((String) v1).trim().compareTo(((String) v2).trim());
+            result = result > 0 ? 1 : result == 0 ? 0 : -1;
         }
 
         return result;
@@ -80,13 +79,11 @@ public class OrderedList<T> {
 
         Node temp = this.head;
         int order = _ascending ? -1 : 1;
-        if (_ascending) {
-            while (temp != null && (compare(val, (T) temp.value) == 0 || compare(val, (T) temp.value) == -1 * order)) {
-                if (temp.value.equals(val))
-                    return temp;
-                else
-                    temp = temp.next;
-            }
+        while (temp != null && (compare(val, (T) temp.value) == 0 || compare(val, (T) temp.value) == -1 * order)) {
+            if (temp.value.equals(val))
+                return temp;
+            else
+                temp = temp.next;
         }
         return null;
     }
