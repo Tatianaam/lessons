@@ -23,10 +23,7 @@ public class HashTable {
 
     public int seekSlot(String value) {
         int hash = hashFun(value);
-        if (slots[hash] == null) {
-            slots[hash] = value;
-            return hash;
-        } else {
+        if (slots[hash] != null) {
             int temp = 0;
             while (slots[hash] != null && temp <= size) {
                 if (slots[hash].equals(value))
@@ -45,7 +42,6 @@ public class HashTable {
     }
 
 
-
     public int put(String value) {
         int temp = seekSlot(value);
         if (temp != -1)
@@ -54,6 +50,7 @@ public class HashTable {
     }
 
     public int find(String value) {
-        return seekSlot(value);
+        int temp = seekSlot(value);
+        return temp != -1 && value.equals(slots[temp]) ? temp : -1;
     }
 }
