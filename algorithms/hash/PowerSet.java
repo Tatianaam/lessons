@@ -2,14 +2,14 @@ package PowerSet;
 
 public class PowerSet {
 
-    private int size;
-    private String[] slots;
+    public int size;
+    public String[] slots;
 
     public PowerSet() {
         slots = new String[20000];
     }
 
-    public void emptySet(){
+    public void emptySet() {
         slots = new String[0];
         size = 0;
     }
@@ -33,36 +33,37 @@ public class PowerSet {
                 }
             }
         }
-        if (slots[hash] == null){
+        if (slots[hash] == null) {
             slots[hash] = value;
             size++;
         }
     }
 
     public boolean get(String value) {
-        if(size == 0) return  false;
+        if (size == 0) return false;
         int temp = seekSlot(value);
         return temp != -1 && value.equals(slots[temp]) ? true : false;
     }
 
     public boolean remove(String value) {
-        if (size == 0) return false;
-        int temp = seekSlot(value);
-        if (temp != -1 && value.equals(slots[temp])) {
-            slots[temp] = null;
-            size--;
-            return true;
-        } else {
-            return false;
+        if (this.size == 0) return false;
+        String tempArr[][] = this.getNonEmpty();
+        for (int i = 0; i < tempArr[1].length; i++) {
+            if (tempArr[0][i].equals(value)) {
+                slots[Integer.valueOf(tempArr[1][i])] = null;
+                size--;
+                return true;
+            }
         }
-
+        return false;
     }
 
     public PowerSet intersection(PowerSet set2) {
         PowerSet temp = new PowerSet();
-        String [] tempArr = set2.getNonEmpty();
+        if (this.size == 0 || set2.size == 0) return temp;
+        String[] tempArr = set2.getNonEmpty()[0];
         for (int i = 0; i < tempArr.length; i++) {
-            if(this.get(tempArr[i]))
+            if (this.get(tempArr[i]))
                 temp.put(tempArr[i]);
         }
         if (temp.size() == 0) temp.emptySet();
@@ -71,13 +72,18 @@ public class PowerSet {
 
     public PowerSet union(PowerSet set2) {
         PowerSet temp = new PowerSet();
-        String [] tempArr = set2.getNonEmpty();
-        for (String s: tempArr) {
-            temp.put(s);
+        String[] tempArr;
+        if (this.size != 0) {
+            tempArr = this.getNonEmpty()[0];
+            for (String s : tempArr) {
+                temp.put(s);
+            }
         }
-        tempArr = this.getNonEmpty();
-        for (String s: tempArr) {
-            temp.put(s);
+        if (set2.size != 0){
+            tempArr = set2.getNonEmpty()[0];
+            for (String s : tempArr) {
+                temp.put(s);
+            }
         }
         if (temp.size == 0) temp.emptySet();
         return temp;
@@ -85,9 +91,10 @@ public class PowerSet {
 
     public PowerSet difference(PowerSet set2) {
         PowerSet temp = new PowerSet();
-        String [] tempArr = this.getNonEmpty();
-        for (String s: tempArr) {
-            if(!set2.get(s))
+        if (this.size == 0) return temp;
+        String[] tempArr = this.getNonEmpty()[0];
+        for (String s : tempArr) {
+            if (!set2.get(s))
                 temp.put(s);
         }
         if (temp.size == 0) temp.emptySet();
@@ -95,23 +102,24 @@ public class PowerSet {
     }
 
     public boolean isSubset(PowerSet set2) {
-        String[] temp = set2.getNonEmpty();
-        for (String s: temp) {
-            if(!this.get(s))
+        String[] temp = set2.getNonEmpty()[0];
+        for (String s : temp) {
+            if (!this.get(s))
                 return false;
         }
         return true;
     }
 
-    public String[] getNonEmpty(){
-        String[] temp = new String[this.size];
-        for (int i = 0, j = 0; i < 20000 && j < temp.length; i++){
+    public String[][] getNonEmpty() {
+        String[][] temp = new String[2][this.size];
+        for (int i = 0, j = 0; i < 20000 && j < temp[1].length; i++) {
             if (slots[i] != null) {
-                temp[j] = slots[i];
+                temp[0][j] = slots[i];
+                temp[1][j] = String.valueOf(i);
                 j++;
             }
         }
-        return  temp;
+        return temp;
     }
 
     private int hashFun(String value) {

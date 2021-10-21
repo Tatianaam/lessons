@@ -3,17 +3,52 @@ package PowerSet;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Arrays;
+
 public class PowerSetTest {
 
     @Test
     public void removeTest(){
         PowerSet powerSet = new PowerSet();
-        powerSet.put("A");
-        Assert.assertEquals(1, powerSet.size());
-        Assert.assertEquals(true, powerSet.get("A"));
-        powerSet.remove("A");
-        Assert.assertEquals(0, powerSet.size());
-        Assert.assertEquals(false, powerSet.get("A"));
+        Assert.assertEquals(false, powerSet.remove("d"));
+        powerSet.put("d");
+        powerSet.put("22");
+        powerSet.put("! #");
+        powerSet.put("!# ");
+        powerSet.put(" !#");
+        powerSet.put("# !");
+        Assert.assertEquals(6, powerSet.size());
+        Assert.assertEquals(true, powerSet.get("d"));
+        Assert.assertEquals(true, powerSet.remove("d"));
+        Assert.assertEquals(false, powerSet.remove("d"));
+        Assert.assertEquals(true, powerSet.remove("! #"));
+        Assert.assertEquals(false, powerSet.remove("! #"));
+        Assert.assertEquals(true, powerSet.remove("# !"));
+        Assert.assertEquals(false, powerSet.remove("# !"));
+        Assert.assertEquals(3, powerSet.size());
+//        Arrays.fill(powerSet.slots, String.valueOf(Math.random()));
+//        powerSet.size = 20000;
+//        Assert.assertEquals(false, powerSet.remove("B"));
+//        Assert.assertEquals(false, powerSet.remove("C"));
+//        Assert.assertEquals(20000, powerSet.getNonEmpty().length);
+    }
+
+
+    @Test
+    public void testDiff(){
+        PowerSet one = new PowerSet();
+        PowerSet two = new PowerSet();
+        Assert.assertEquals(0, one.difference(two).size());
+        Assert.assertEquals(0, two.difference(one).size());
+        one.put("A");
+        Assert.assertEquals(1, one.difference(two).size());
+        Assert.assertEquals(true, one.difference(two).get("A"));
+        Assert.assertEquals(0, two.difference(one).size());
+        two.put("B");
+        Assert.assertEquals(1, one.difference(two).size());
+        Assert.assertEquals(1, two.difference(one).size());
     }
 
     @Test
@@ -123,18 +158,18 @@ public class PowerSetTest {
         Assert.assertEquals(1, two.union(one).size());
     }
 
-    @Test
-    public void testDiff(){
-        PowerSet one = new PowerSet();
-        PowerSet two = new PowerSet();
-        Assert.assertEquals(0, one.difference(two).size());
-        Assert.assertEquals(0, two.difference(one).size());
-        one.put("A");
-        Assert.assertEquals(1, one.difference(two).size());
-        Assert.assertEquals(true, one.difference(two).get("A"));
-        Assert.assertEquals(0, two.difference(one).size());
-        two.put("B");
-        Assert.assertEquals(1, one.difference(two).size());
-        Assert.assertEquals(1, two.difference(one).size());
-    }
+
+//    @Test
+//    public void timeTest(){
+//        System.out.println(LocalDateTime.now());
+//        PowerSet one = new PowerSet();
+//        PowerSet two = new PowerSet();
+//        one.size = 20000;
+//        two.size = 20000;
+//        Arrays.fill(one.slots, String.valueOf(Math.random()));
+//        Arrays.fill(two.slots, String.valueOf(Math.random()));
+//        System.out.println(LocalDateTime.now());
+//        Assert.assertEquals(40000, one.union(two).size());
+//        System.out.println(LocalDateTime.now());
+//    }
 }
