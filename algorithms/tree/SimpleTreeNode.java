@@ -107,7 +107,7 @@ class SimpleTree<T> {
 
     private int leafCountHelper(SimpleTreeNode<T> node, int result) {
         if (node == null)
-            return result + 1;
+            return result;
         if (node.Children == null)
             return result + 1;
         for (SimpleTreeNode<T> n : node.Children) {
