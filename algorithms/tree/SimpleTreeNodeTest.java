@@ -106,6 +106,31 @@ public class SimpleTreeNodeTest {
         Assert.assertEquals(6, tree.Count());
         Assert.assertEquals(4, tree.LeafCount());
 
+        SimpleTreeNode<Integer> node44 = new SimpleTreeNode<>(2, null);
+        tree.AddChild(node2, node44);
+        Assert.assertEquals(7, tree.Count());
+        Assert.assertEquals(5, tree.LeafCount());
+
+        SimpleTreeNode<Integer> node440 = new SimpleTreeNode<>(2, node);
+        tree.AddChild(node44, node440);
+        Assert.assertEquals(8, tree.Count());
+        Assert.assertEquals(5, tree.LeafCount());
+
+        SimpleTreeNode<Integer> node4440 = new SimpleTreeNode<>(2, node);
+        tree.AddChild(node44, node4440);
+        Assert.assertEquals(9, tree.Count());
+        Assert.assertEquals(6, tree.LeafCount());
+
+        SimpleTreeNode<Integer> node4441 = new SimpleTreeNode<>(2, node);
+        tree.AddChild(node4440, node4441);
+        Assert.assertEquals(10, tree.Count());
+        Assert.assertEquals(6, tree.LeafCount());
+
+        SimpleTreeNode<Integer> node0 = new SimpleTreeNode<>(2, node);
+        tree.AddChild(node44, node0);
+        Assert.assertEquals(11, tree.Count());
+        Assert.assertEquals(7, tree.LeafCount());
+
         tree.DeleteNode(node2);
         Assert.assertEquals(3, tree.Count());
         Assert.assertEquals(2, tree.LeafCount());
