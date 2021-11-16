@@ -1,5 +1,3 @@
-package Tree;
-
 import java.util.*;
 
 public class SimpleTreeNode<T> {
@@ -33,7 +31,10 @@ class SimpleTree<T> {
     }
 
     public void DeleteNode(SimpleTreeNode<T> NodeToDelete) {
-        NodeToDelete.Parent.Children.remove(NodeToDelete);
+        if (this.Root == NodeToDelete)
+            this.Root = null;
+        else
+            NodeToDelete.Parent.Children.remove(NodeToDelete);
     }
 
     public List<SimpleTreeNode<T>> GetAllNodes() {
@@ -46,7 +47,7 @@ class SimpleTree<T> {
         if (node == null)
             return;
         nodes.add(node);
-        if (node.Children == null)
+        if (node.Children == null || node.Children.size() == 0)
             return;
         for (SimpleTreeNode<T> n : node.Children)
             goOver(n, nodes);
@@ -63,7 +64,7 @@ class SimpleTree<T> {
             return;
         if (node.NodeValue.equals(value))
             nodes.add(node);
-        if (node.Children == null)
+        if (node.Children == null || node.Children.size() == 0)
             return;
         for (SimpleTreeNode<T> n : node.Children)
             search(n, nodes, value);
@@ -86,7 +87,7 @@ class SimpleTree<T> {
     private int countHelper(SimpleTreeNode<T> node, int result) {
         if (node == null) return 0;
         result++;
-        if (node.Children == null)
+        if (node.Children == null || node.Children.size() == 0)
             return result;
         for (SimpleTreeNode<T> n : node.Children) {
             result = countHelper(n, result);
@@ -98,23 +99,23 @@ class SimpleTree<T> {
     public int LeafCount() {
         if (this.Root == null)
             return 0;
-        if (this.Root.Children == null)
+        if (this.Root.Children == null || this.Root.Children.size() == 0)
             return 1;
         int result = 0;
-        result = leafCountHelper(this.Root, result);
+        result = leafCountHelper(this.Root);
         return result;
     }
 
-    private int leafCountHelper(SimpleTreeNode<T> node, int result) {
+    private int leafCountHelper(SimpleTreeNode<T> node) {
         if (node == null)
             return 0;
-        if (node.Children == null)
+        if (node.Children == null || node.Children.size() == 0)
             return 1;
         int temp = 0;
         for (SimpleTreeNode<T> n : node.Children) {
-            temp = temp + leafCountHelper(n, 0);
+            temp = temp + leafCountHelper(n);
         }
-        return result + temp;
+        return temp;
     }
 
 }
