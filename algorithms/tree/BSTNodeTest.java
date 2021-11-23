@@ -73,5 +73,11 @@ public class BSTNodeTest {
         Assert.assertEquals(null, tree.FindNodeByKey(5).Node.LeftChild);
         Assert.assertEquals(false, tree.FindNodeByKey(4).NodeHasKey);
         Assert.assertEquals(2, tree.Count());
+
+        Assert.assertEquals(true, tree.DeleteNodeByKey(5));
+        Assert.assertEquals(0, tree.Count());
+        Assert.assertEquals(null, tree.Root);
+        Assert.assertEquals(false, tree.FindNodeByKey(8).NodeHasKey);
+        Assert.assertEquals(false, tree.FindNodeByKey(5).NodeHasKey);
     }
 }

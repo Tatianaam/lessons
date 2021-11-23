@@ -1,5 +1,3 @@
-package Tree;
-
 
 class BSTNode<T> {
     public int NodeKey;
@@ -102,6 +100,8 @@ class BST<T> {
                 temp.Node.Parent.RightChild = null;
             else
                 temp.Node.Parent.LeftChild = null;
+        } else {
+            this.Root = null;
         }
         return true;
     }
