@@ -113,6 +113,7 @@ class BST<T> {
                     temp.Node.Parent.RightChild = min;
                 else
                     temp.Node.Parent.LeftChild = min;
+                min.Parent = temp.Node.Parent;
             }
             min.LeftChild = temp.Node.LeftChild;
         } else {
