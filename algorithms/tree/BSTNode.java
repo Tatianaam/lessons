@@ -1,3 +1,4 @@
+package Tree;
 
 class BSTNode<T> {
     public int NodeKey;
@@ -95,14 +96,43 @@ class BST<T> {
     public boolean DeleteNodeByKey(int key) {
         BSTFind<T> temp = this.FindNodeByKey(key);
         if (temp.Node == null || !temp.NodeHasKey) return false;
-        if (temp.Node.Parent != null) {
-            if (temp.Node.Parent.RightChild != null && temp.Node.Parent.RightChild.equals(temp.Node))
-                temp.Node.Parent.RightChild = null;
-            else
-                temp.Node.Parent.LeftChild = null;
+        if (temp.Node.RightChild != null) {
+            BSTNode<T> min = this.FinMinMax(temp.Node.RightChild, false);
+            if (temp.Node.Parent == null) this.Root = min;
+            if (!min.equals(temp.Node.RightChild)) {
+                if (min.RightChild != null) {
+                    min.Parent.LeftChild = min.RightChild;
+                    min.RightChild.Parent = min.Parent;
+                } else {
+                    min.Parent.LeftChild = null;
+                }
+                min.RightChild = temp.Node.RightChild;
+            }
+            if (temp.Node.Parent != null) {
+                if (temp.Node.Parent.RightChild != null && temp.Node.Parent.RightChild.equals(temp.Node))
+                    temp.Node.Parent.RightChild = min;
+                else
+                    temp.Node.Parent.LeftChild = min;
+            }
+            min.LeftChild = temp.Node.LeftChild;
         } else {
-            this.Root = null;
+            if (temp.Node.LeftChild == null && temp.Node.Parent != null) {
+                if (temp.Node.Parent.RightChild != null && temp.Node.Parent.RightChild.equals(temp.Node))
+                    temp.Node.Parent.RightChild = null;
+                else
+                    temp.Node.Parent.LeftChild = null;
+
+            } else {
+                if (temp.Node.Parent != null) {
+                    if (temp.Node.Parent.RightChild != null && temp.Node.Parent.RightChild.equals(temp.Node))
+                        temp.Node.Parent.RightChild = temp.Node.LeftChild;
+                    else
+                        temp.Node.Parent.LeftChild = temp.Node.LeftChild;
+                }
+                temp.Node.LeftChild.Parent = temp.Node.Parent;
+            }
         }
+
         return true;
     }
 
