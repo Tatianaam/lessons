@@ -1,4 +1,4 @@
-package Tree;
+package tree;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -71,6 +71,8 @@ public class BSTNodeTest {
         Assert.assertEquals(true, tree.DeleteNodeByKey(3));
         Assert.assertEquals(false, tree.FindNodeByKey(3).NodeHasKey);
         Assert.assertEquals(4, tree.FindNodeByKey(5).Node.LeftChild.NodeKey);
+        Assert.assertEquals(4, tree.Root.LeftChild.NodeKey);
+        Assert.assertEquals(4, tree.Root.LeftChild.LeftChild.Parent.NodeKey);
         Assert.assertEquals(2, tree.FindNodeByKey(5).Node.LeftChild.LeftChild.NodeKey);
         Assert.assertEquals(2, tree.FindNodeByKey(4).Node.LeftChild.NodeKey);
         Assert.assertEquals(4, tree.Count());
@@ -81,6 +83,13 @@ public class BSTNodeTest {
         Assert.assertEquals(4, tree.Root.LeftChild.NodeKey);
         Assert.assertEquals(2, tree.Root.LeftChild.LeftChild.NodeKey);
         Assert.assertEquals(false, tree.FindNodeByKey(5).NodeHasKey);
+
+        Assert.assertEquals(true, tree.DeleteNodeByKey(2));
+        Assert.assertEquals(2, tree.Count());
+        Assert.assertEquals(8, tree.Root.NodeKey);
+        Assert.assertEquals(4, tree.Root.LeftChild.NodeKey);
+        Assert.assertEquals(null, tree.Root.LeftChild.LeftChild);
+        Assert.assertEquals(false, tree.FindNodeByKey(2).NodeHasKey);
     }
 
     @Test
@@ -109,5 +118,12 @@ public class BSTNodeTest {
         Assert.assertEquals(8, tree.Root.LeftChild.LeftChild.RightChild.LeftChild.NodeKey);
         Assert.assertEquals(10, tree.Root.LeftChild.LeftChild.RightChild.RightChild.NodeKey);
         Assert.assertEquals(9, tree.Root.LeftChild.LeftChild.RightChild.LeftChild.Parent.NodeKey);
+
+        tree.DeleteNodeByKey(10);
+        Assert.assertEquals(false, tree.FindNodeByKey(10).NodeHasKey);
+        Assert.assertEquals(6, tree.Count());
+        Assert.assertEquals(null, tree.Root.LeftChild.LeftChild.RightChild.RightChild);
+
+
     }
 }

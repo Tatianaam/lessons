@@ -1,4 +1,4 @@
-package Tree;
+package tree;
 
 class BSTNode<T> {
     public int NodeKey;
@@ -116,6 +116,7 @@ class BST<T> {
                 min.Parent = temp.Node.Parent;
             }
             min.LeftChild = temp.Node.LeftChild;
+            min.LeftChild.Parent = min;
         } else {
             if (temp.Node.LeftChild == null && temp.Node.Parent != null) {
                 if (temp.Node.Parent.RightChild != null && temp.Node.Parent.RightChild.equals(temp.Node))
@@ -130,7 +131,8 @@ class BST<T> {
                     else
                         temp.Node.Parent.LeftChild = temp.Node.LeftChild;
                 }
-                temp.Node.LeftChild.Parent = temp.Node.Parent;
+                if (temp.Node.LeftChild != null)
+                    temp.Node.LeftChild.Parent = temp.Node.Parent;
             }
         }
 
