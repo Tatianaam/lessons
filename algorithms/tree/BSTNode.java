@@ -1,4 +1,4 @@
-package tree;
+package Tree;
 
 class BSTNode<T> {
     public int NodeKey;
@@ -96,9 +96,9 @@ class BST<T> {
     public boolean DeleteNodeByKey(int key) {
         BSTFind<T> temp = this.FindNodeByKey(key);
         if (temp.Node == null || !temp.NodeHasKey) return false;
+        BSTNode<T> min = null;
         if (temp.Node.RightChild != null) {
-            BSTNode<T> min = this.FinMinMax(temp.Node.RightChild, false);
-            if (temp.Node.Parent == null) this.Root = min;
+            min = this.FinMinMax(temp.Node.RightChild, false);
             if (!min.equals(temp.Node.RightChild)) {
                 if (min.RightChild != null) {
                     min.Parent.LeftChild = min.RightChild;
@@ -107,37 +107,32 @@ class BST<T> {
                     min.Parent.LeftChild = null;
                 }
                 min.RightChild = temp.Node.RightChild;
-            }
-            if (temp.Node.Parent != null) {
-                if (temp.Node.Parent.RightChild != null && temp.Node.Parent.RightChild.equals(temp.Node))
-                    temp.Node.Parent.RightChild = min;
-                else
-                    temp.Node.Parent.LeftChild = min;
-                min.Parent = temp.Node.Parent;
-            }
-            min.LeftChild = temp.Node.LeftChild;
-            min.LeftChild.Parent = min;
-        } else {
-            if (temp.Node.LeftChild == null && temp.Node.Parent != null) {
-                if (temp.Node.Parent.RightChild != null && temp.Node.Parent.RightChild.equals(temp.Node))
-                    temp.Node.Parent.RightChild = null;
-                else
-                    temp.Node.Parent.LeftChild = null;
-
-            } else {
-                if (temp.Node.Parent != null) {
-                    if (temp.Node.Parent.RightChild != null && temp.Node.Parent.RightChild.equals(temp.Node))
-                        temp.Node.Parent.RightChild = temp.Node.LeftChild;
-                    else
-                        temp.Node.Parent.LeftChild = temp.Node.LeftChild;
-                }
-                if (temp.Node.LeftChild != null)
-                    temp.Node.LeftChild.Parent = temp.Node.Parent;
+                temp.Node.RightChild.Parent = min;
             }
         }
-
+        if (temp.Node.LeftChild != null) {
+            if (min != null) {
+                min.LeftChild = temp.Node.LeftChild;
+                temp.Node.LeftChild.Parent = min;
+            } else {
+                min = temp.Node.LeftChild;
+            }
+        }
+        if (temp.Node.Parent != null) {
+            if (temp.Node.Parent.RightChild != null && temp.Node.Parent.RightChild.equals(temp.Node))
+                temp.Node.Parent.RightChild = min;
+            else
+                temp.Node.Parent.LeftChild = min;
+            if (min != null)
+                min.Parent = temp.Node.Parent;
+        } else {
+            this.Root = min;
+            if (min != null)
+                min.Parent = null;
+        }
         return true;
     }
+
 
     public int Count() {
 
