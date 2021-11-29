@@ -3,6 +3,8 @@ package Tree;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 public class BSTNodeTest {
 
     @Test
@@ -237,7 +239,67 @@ public class BSTNodeTest {
         Assert.assertEquals(9, tree.Root.LeftChild.RightChild.NodeKey);
         Assert.assertEquals(null, tree.Root.LeftChild.LeftChild);
         Assert.assertEquals(9, tree.Root.LeftChild.RightChild.NodeKey);
-        
+
+    }
+
+    @Test
+    public void testOrder(){
+        BST<Integer> tree = new BST<>(null);
+        tree.AddKeyValue(16, 16);
+        tree.AddKeyValue(11, 11);
+        tree.AddKeyValue(6, 6);
+        tree.AddKeyValue(9, 9);
+        tree.AddKeyValue(2, 2);
+        tree.AddKeyValue(10, 10);
+        tree.AddKeyValue(7, 7);
+        tree.AddKeyValue(8, 8);
+        tree.AddKeyValue(20, 20);
+        tree.AddKeyValue(18, 18);
+        tree.AddKeyValue(30, 30);
+        tree.AddKeyValue(17, 17);
+        tree.AddKeyValue(19, 19);
+        tree.AddKeyValue(35, 35);
+        tree.AddKeyValue(25, 25);
+        tree.AddKeyValue(24, 24);
+        tree.AddKeyValue(26, 26);
+
+        ArrayList<BSTNode> temp = tree.WideAllNodes();
+        Assert.assertEquals(16, temp.get(0).NodeKey);
+        Assert.assertEquals(11, temp.get(1).NodeKey);
+        Assert.assertEquals(20, temp.get(2).NodeKey);
+        Assert.assertEquals(6, temp.get(3).NodeKey);
+        Assert.assertEquals(18, temp.get(4).NodeKey);
+        Assert.assertEquals(30, temp.get(5).NodeKey);
+        Assert.assertEquals(20, temp.get(2).NodeKey);
+        Assert.assertEquals(8, temp.get(16).NodeKey);
+        Assert.assertEquals(26, temp.get(15).NodeKey);
+
+        temp = tree.DeepAllNodes(0);
+        Assert.assertEquals(2, temp.get(0).NodeKey);
+        Assert.assertEquals(6, temp.get(1).NodeKey);
+        Assert.assertEquals(7, temp.get(2).NodeKey);
+        Assert.assertEquals(16, temp.get(7).NodeKey);
+        Assert.assertEquals(35, temp.get(16).NodeKey);
+        Assert.assertEquals(30, temp.get(15).NodeKey);
+        Assert.assertEquals(26, temp.get(14).NodeKey);
+
+        temp = tree.DeepAllNodes(1);
+        Assert.assertEquals(2, temp.get(0).NodeKey);
+        Assert.assertEquals(8, temp.get(1).NodeKey);
+        Assert.assertEquals(7, temp.get(2).NodeKey);
+        Assert.assertEquals(17, temp.get(7).NodeKey);
+        Assert.assertEquals(16, temp.get(16).NodeKey);
+        Assert.assertEquals(20, temp.get(15).NodeKey);
+        Assert.assertEquals(30, temp.get(14).NodeKey);
+
+        temp = tree.DeepAllNodes(2);
+        Assert.assertEquals(16, temp.get(0).NodeKey);
+        Assert.assertEquals(11, temp.get(1).NodeKey);
+        Assert.assertEquals(6, temp.get(2).NodeKey);
+        Assert.assertEquals(10, temp.get(7).NodeKey);
+        Assert.assertEquals(35, temp.get(16).NodeKey);
+        Assert.assertEquals(26, temp.get(15).NodeKey);
+        Assert.assertEquals(24, temp.get(14).NodeKey);
     }
 
 
