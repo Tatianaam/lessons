@@ -1,5 +1,7 @@
 package Tree;
 
+import java.util.*;
+
 class BSTNode {
     public int NodeKey;
     public BSTNode Parent;
@@ -25,6 +27,7 @@ class BalancedBST {
     }
 
     public void GenerateTree(int[] a) {
+        Arrays.sort(a);
         this.Root = treeGeneratorHelper(a, this.Root, 0, a.length);
     }
 

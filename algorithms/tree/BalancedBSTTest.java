@@ -122,4 +122,13 @@ public class BalancedBSTTest {
         Assert.assertEquals(true, balancedBST.IsBalanced(balancedBST.Root));
     }
 
+    @Test
+    public void test(){
+        int[] input = {1, 1, 2, 2, 3, 3, 3, 3, 6, 9, 7, 7, 8};
+        BalancedBST balancedBST = new BalancedBST();
+        Assert.assertEquals(null, balancedBST.Root);
+        balancedBST.GenerateTree(input);
+        Assert.assertEquals(true, balancedBST.IsBalanced(balancedBST.Root));
+    }
+
 }
