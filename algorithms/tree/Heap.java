@@ -15,6 +15,8 @@ class Heap {
             size += Math.pow(2, depth--);
         this.HeapArray = new int[size];
         Arrays.fill(this.HeapArray, -1);
+        for (int i = 0; i < size; i ++)
+            this.Add(a[i]);
     }
 
     public int GetMax() {
@@ -49,13 +51,13 @@ class Heap {
             return false;
         else {
             int child = -1;
-            for (int i = 0; i < HeapArray.length - 1; i++)
+            for (int i = 0; i < HeapArray.length; i++)
                 if (this.HeapArray[i] == -1) {
                     child = i;
                     break;
                 }
             HeapArray[child] = key;
-            while (child >= 0 && child < HeapArray.length) {
+            while (child > 0 && child < HeapArray.length) {
                 int parent = child % 2 == 0 ? (child - 2) / 2 : (child - 1) / 2;
                 if (HeapArray[parent] < HeapArray[child]) {
                     int temp = HeapArray[parent];
