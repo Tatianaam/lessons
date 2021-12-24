@@ -126,7 +126,7 @@ class SimpleTree<T> {
         ArrayList<Integer> checked = new ArrayList<>();
         ArrayList<T> first = new ArrayList<>();
         ArrayList<T> second = new ArrayList<>();
-        for (int i = size - 1; i > 0; i++) {
+        for (int i = size - 1; i > 0; i--) {
             int count = 0;
             count = getNumberOfNodes(count, matrix, i, checked);
             if (count != 0) {
@@ -139,7 +139,7 @@ class SimpleTree<T> {
             }
         }
         ArrayList<T> result = new ArrayList<>();
-        for (int i = 0; i < first.size(); i ++){
+        for (int i = 0; i < first.size(); i++) {
             result.add(first.get(i));
             result.add(second.get(i));
         }
@@ -147,12 +147,12 @@ class SimpleTree<T> {
     }
 
     private int getNumberOfNodes(int count, boolean[][] matrix, int i, ArrayList<Integer> checked) {
-        checked.add(i);
         if (!matrix[i][matrix.length])
             for (int j = 0; j < matrix.length; j++) {
                 if (matrix[i][j] && !checked.contains(i))
                     count++;
             }
+        checked.add(i);
         return count;
     }
 
