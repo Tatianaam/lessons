@@ -114,16 +114,16 @@ public class SimpleTreeNodeTest {
         Assert.assertEquals(18, tree.Count());
         result = tree.EvenTrees();
         Assert.assertEquals(8, result.size());
-        Assert.assertEquals(true, result.contains(node9));
-        Assert.assertEquals(true, result.contains(node7));
-        Assert.assertEquals(true, result.contains(node));
-        Assert.assertEquals(true, result.contains(node15));
-        Assert.assertEquals(true, result.contains(node12));
-        Assert.assertEquals(true, result.contains(node3));
-        Assert.assertEquals(true, result.contains(node2));
-        Assert.assertEquals(false, result.contains(node4));
-        Assert.assertEquals(false, result.contains(node5));
-        Assert.assertEquals(false, result.contains(node8));
+        Assert.assertEquals(true, result.contains(node9.NodeValue));
+        Assert.assertEquals(true, result.contains(node7.NodeValue));
+        Assert.assertEquals(true, result.contains(node.NodeValue));
+        Assert.assertEquals(true, result.contains(node15.NodeValue));
+        Assert.assertEquals(true, result.contains(node12.NodeValue));
+        Assert.assertEquals(true, result.contains(node3.NodeValue));
+        Assert.assertEquals(true, result.contains(node2.NodeValue));
+        Assert.assertEquals(false, result.contains(node4.NodeValue));
+        Assert.assertEquals(false, result.contains(node5.NodeValue));
+        Assert.assertEquals(false, result.contains(node8.NodeValue));
 
     }
 
