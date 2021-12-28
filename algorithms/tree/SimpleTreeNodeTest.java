@@ -129,6 +129,31 @@ public class SimpleTreeNodeTest {
 
 
     @Test
+    public void testEvenFour(){
+        SimpleTree<Integer> tree = new SimpleTree<>(null);
+        ArrayList<Integer> result = tree.EvenTrees();
+        SimpleTreeNode<Integer> node = new SimpleTreeNode<>(1, null);
+        tree = new SimpleTree<>(node);
+        SimpleTreeNode<Integer> node1 = new SimpleTreeNode<>(2, node);
+        tree.AddChild(node, node1);
+        SimpleTreeNode<Integer> node2 = new SimpleTreeNode<>(3, node);
+        tree.AddChild(node1, node2);
+        SimpleTreeNode<Integer> node3 = new SimpleTreeNode<>(4, node);
+        tree.AddChild(node2, node3);
+        SimpleTreeNode<Integer> node4 = new SimpleTreeNode<>(5, node);
+        tree.AddChild(node3, node4);
+        SimpleTreeNode<Integer> node5 = new SimpleTreeNode<>(6, node);
+        tree.AddChild(node4, node5);
+        result = tree.EvenTrees();
+        Assert.assertEquals(4, result.size());
+        Assert.assertEquals(true, result.contains(node2.NodeValue));
+        Assert.assertEquals(true, result.contains(node1.NodeValue));
+        Assert.assertEquals(true, result.contains(node4.NodeValue));
+        Assert.assertEquals(true, result.contains(node3.NodeValue));
+
+    }
+
+    @Test
     public void testInsert() {
 
         SimpleTree<Integer> tree = new SimpleTree<>(null);
