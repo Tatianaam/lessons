@@ -7,6 +7,7 @@ public class SimpleTreeNode<T> {
     public SimpleTreeNode<T> Parent;
     public List<SimpleTreeNode<T>> Children;
     public int level;
+    public boolean checked;
 
     public SimpleTreeNode(T val, SimpleTreeNode<T> parent) {
         NodeValue = val;
@@ -119,27 +120,26 @@ class SimpleTree<T> {
 
     public ArrayList<T> EvenTrees() {
         if (this.Root == null || this.Root.Children == null || this.Root.Children.isEmpty()) return new ArrayList<>();
-        int size = this.Count();
-        if (size % 2 == 1) return new ArrayList<>();
         List<SimpleTreeNode<T>> nodes = GetAllNodes();
-        boolean[][] matrix = getMatrix(new boolean[size][size + 1], nodes);
-        Set<Integer> checked = new HashSet<>();
+        if (nodes.size() % 2 == 1) return new ArrayList<>();
+        boolean[][] matrix = getMatrix(new boolean[nodes.size()][nodes.size() + 1], nodes);
         ArrayList<T> result = new ArrayList<>();
-        for (int i = size - 1; i > 0; i--) {
-            if(checked.contains(i)) continue;
+        for (int i = nodes.size() - 1; i > 0; i--) {
+            if (nodes.get(i).checked) continue;
             int count = 0;
-            count = getNumberOfNodes(count, matrix, i, checked);
+            count = getNumberOfNodes(count, matrix, i, nodes);
             if (count != 0) {
                 count++;
                 int temp = i;
                 while (count % 2 == 1) {
-                    checked.add(temp);
                     if (temp == 0) break;
+                    nodes.get(temp).checked = true;
                     temp = nodes.indexOf(nodes.get(temp).Parent);
-                    count = getNumberOfNodes(count, matrix, temp, checked);
+                    count = getNumberOfNodes(count, matrix, temp, nodes);
                     count++;
                 }
-                checked.add(temp);
+                nodes.get(temp).checked = true;
+                if (temp == 0) continue;
                 result.add(nodes.get(temp).Parent.NodeValue);
                 result.add(nodes.get(temp).NodeValue);
             }
@@ -147,10 +147,10 @@ class SimpleTree<T> {
         return result;
     }
 
-    private int getNumberOfNodes(int count, boolean[][] matrix, int i, Set<Integer> checked) {
+    private int getNumberOfNodes(int count, boolean[][] matrix, int i, List<SimpleTreeNode<T>> nodes) {
         if (!matrix[i][matrix.length])
             for (int j = 0; j < matrix.length; j++) {
-                if (matrix[i][j] && !checked.contains(j))
+                if (matrix[i][j] && !nodes.get(j).checked)
                     count++;
             }
         return count;
@@ -159,6 +159,7 @@ class SimpleTree<T> {
     private boolean[][] getMatrix(boolean[][] matrix, List<SimpleTreeNode<T>> nodes) {
         for (int i = 0; i < nodes.size(); i++) {
             SimpleTreeNode<T> temp = nodes.get(i);
+            temp.checked = false;
             if (temp.Children != null && !temp.Children.isEmpty())
                 for (SimpleTreeNode<T> n : temp.Children) {
                     matrix[i][nodes.indexOf(n)] = true;

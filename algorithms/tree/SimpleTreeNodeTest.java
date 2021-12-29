@@ -49,6 +49,22 @@ public class SimpleTreeNodeTest {
     }
 
     @Test
+    public void testNotEven(){
+        SimpleTree<Integer> tree = new SimpleTree<>(null);
+        ArrayList<Integer> result = tree.EvenTrees();
+        SimpleTreeNode<Integer> node = new SimpleTreeNode<>(1, null);
+        tree = new SimpleTree<>(node);
+        SimpleTreeNode<Integer> node1 = new SimpleTreeNode<>(2, node);
+        tree.AddChild(node, node1);
+        SimpleTreeNode<Integer> node2 = new SimpleTreeNode<>(3, node);
+        tree.AddChild(node, node2);
+        SimpleTreeNode<Integer> node3 = new SimpleTreeNode<>(4, node);
+        tree.AddChild(node, node3);
+        result = tree.EvenTrees();
+        Assert.assertEquals(0, result.size());
+    }
+
+    @Test
     public void testEvenSecond(){
         SimpleTree<Integer> tree = new SimpleTree<>(null);
         ArrayList<Integer> result = tree.EvenTrees();
