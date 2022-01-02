@@ -88,7 +88,8 @@ class SimpleGraph {
                     }
                 }
             }
-            if (!vertex[VFrom].hit) continue;
+            if (!vertex[VFrom].hit)
+                continue;
             path.pop();
             if (path.empty())
                 return null;
