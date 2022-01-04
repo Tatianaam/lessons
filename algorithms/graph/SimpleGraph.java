@@ -71,31 +71,29 @@ class SimpleGraph {
     private Stack<Integer> DFSHelper(int VFrom, int VTo) {
         Stack<Integer> path = new Stack<>();
         clearHits();
-        while (VFrom != -1) {
+        while (true) {
             vertex[VFrom].hit = true;
             if ((!path.empty() && path.peek() != VFrom) || path.empty())
                 path.push(VFrom);
 
             for (int i = 0; i < vertex.length; i++) {
-                if (m_adjacency[VFrom][i] == 1) {
-                    if (i == VTo) {
-                        path.push(i);
-                        return path;
-                    }
-                    if (!vertex[i].hit) {
-                        VFrom = i;
-                        break;
-                    }
+                if (i == VTo && m_adjacency[VFrom][i] == 1) {
+                    path.push(i);
+                    return path;
                 }
             }
-            if (!vertex[VFrom].hit)
-                continue;
+            for (int i = 0; i < vertex.length; i++) {
+                if (m_adjacency[VFrom][i] == 1 && !vertex[i].hit) {
+                    VFrom = i;
+                    break;
+                }
+            }
+            if (!vertex[VFrom].hit) continue;
             path.pop();
             if (path.empty())
                 return null;
             VFrom = path.peek();
         }
-        return path;
     }
 
     private void clearHits() {
