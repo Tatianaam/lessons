@@ -68,6 +68,51 @@ class SimpleGraph {
         return result;
     }
 
+    public ArrayList<Vertex> BreadthFirstSearch(int VFrom, int VTo) {
+        ArrayList<Vertex> result = new ArrayList<>();
+        Stack<Integer> path = BFSHelper(VFrom, VTo);
+        if (path != null)
+            while (!path.empty())
+                result.add(vertex[path.pop()]);
+        return result;
+    }
+
+    public Stack<Integer> BFSHelper(int VFrom, int VTo) {
+        clearHits();
+        Queue<SimpleTreeNode<Integer>> queue = new Queue<>();
+        SimpleTreeNode<Integer> tempFrom = new SimpleTreeNode<>(VFrom);
+        SimpleTree<Integer> path = new SimpleTree<>(tempFrom);
+        while (true) {
+            if (!vertex[tempFrom.NodeValue].hit) {
+                vertex[tempFrom.NodeValue].hit = true;
+                for (int i = 0; i < vertex.length; i++) {
+                    SimpleTreeNode<Integer> n;
+                    n = new SimpleTreeNode<>(i);
+                    if (i == VTo && m_adjacency[tempFrom.NodeValue][i] == 1) {
+                        path.AddChild(tempFrom, n);
+                        return getReversedPath(n);
+                    } else if (m_adjacency[tempFrom.NodeValue][i] == 1 && !vertex[i].hit) {
+                        path.AddChild(tempFrom, n);
+                        queue.enqueue(n);
+                    }
+                }
+            }
+            if (queue.size() != 0)
+                tempFrom = queue.dequeue();
+            else
+                return null;
+        }
+    }
+
+    private Stack<Integer> getReversedPath(SimpleTreeNode<Integer> n) {
+        Stack<Integer> temp = new Stack<>();
+        while (n != null) {
+            temp.push(n.NodeValue);
+            n = n.Parent;
+        }
+        return temp;
+    }
+
     private Stack<Integer> DFSHelper(int VFrom, int VTo) {
         Stack<Integer> path = new Stack<>();
         clearHits();
@@ -100,5 +145,55 @@ class SimpleGraph {
         for (Vertex x : this.vertex)
             if (x != null)
                 x.hit = false;
+    }
+}
+
+class Queue<T> {
+
+    private LinkedList<T> list;
+
+    public Queue() {
+        list = new LinkedList<>();
+    }
+
+    public void enqueue(T item) {
+        list.addLast(item);
+    }
+
+    public T dequeue() {
+        return list.size() == 0 ? null : list.removeFirst();
+    }
+
+    public int size() {
+        return list.size();
+    }
+
+}
+
+class SimpleTreeNode<T> {
+    public T NodeValue;
+    public SimpleTreeNode<T> Parent;
+    public List<SimpleTreeNode<T>> Children;
+
+    public SimpleTreeNode(T val) {
+        NodeValue = val;
+        Parent = null;
+        Children = null;
+    }
+}
+
+class SimpleTree<T> {
+    public SimpleTreeNode<T> Root;
+
+    public SimpleTree(SimpleTreeNode<T> root) {
+        Root = root;
+    }
+
+    public void AddChild(SimpleTreeNode<T> ParentNode, SimpleTreeNode<T> NewChild) {
+        if (ParentNode.Children == null)
+            ParentNode.Children = new ArrayList<>();
+
+        ParentNode.Children.add(NewChild);
+        NewChild.Parent = ParentNode;
     }
 }

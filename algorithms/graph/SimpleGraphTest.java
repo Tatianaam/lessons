@@ -7,6 +7,58 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 public class SimpleGraphTest {
+
+    @Test
+    public void testBFSOne() {
+        SimpleGraph simpleGraph = new SimpleGraph(10);
+        simpleGraph.AddVertex(0);
+        simpleGraph.AddVertex(1);
+        simpleGraph.AddVertex(2);
+        simpleGraph.AddVertex(3);
+        simpleGraph.AddVertex(4);
+        simpleGraph.AddVertex(5);
+        simpleGraph.AddVertex(6);
+        simpleGraph.AddVertex(7);
+        simpleGraph.AddVertex(8);
+        simpleGraph.AddVertex(9);
+        ArrayList<Vertex> result = simpleGraph.BreadthFirstSearch(0, 3);
+        Assert.assertEquals(true, result.isEmpty());
+        simpleGraph.AddEdge(0, 1);
+        simpleGraph.AddEdge(0, 2);
+        simpleGraph.AddEdge(1, 2);
+        simpleGraph.AddEdge(1, 3);
+        simpleGraph.AddEdge(1, 4);
+        simpleGraph.AddEdge(3, 4);
+        simpleGraph.AddEdge(4, 8);
+        simpleGraph.AddEdge(2, 5);
+        simpleGraph.AddEdge(2, 6);
+        simpleGraph.AddEdge(5, 6);
+        simpleGraph.AddEdge(6, 7);
+        result = simpleGraph.BreadthFirstSearch(0, 3);
+        Assert.assertEquals(3, result.size());
+        Assert.assertEquals(3, result.get(result.size() - 1).Value);
+
+        result = simpleGraph.BreadthFirstSearch(0, 6);
+        Assert.assertEquals(3, result.size());
+        Assert.assertEquals(2, result.get(1).Value);
+
+        result = simpleGraph.BreadthFirstSearch(0, 7);
+        Assert.assertEquals(4, result.size());
+        Assert.assertEquals(2, result.get(1).Value);
+        Assert.assertEquals(0, result.get(0).Value);
+        Assert.assertEquals(6, result.get(2).Value);
+        Assert.assertEquals(7, result.get(3).Value);
+
+        result = simpleGraph.BreadthFirstSearch(1, 7);
+        Assert.assertEquals(4, result.size());
+        Assert.assertEquals(2, result.get(1).Value);
+        Assert.assertEquals(1, result.get(0).Value);
+        Assert.assertEquals(6, result.get(2).Value);
+        Assert.assertEquals(7, result.get(3).Value);
+
+    }
+
+
     @Test
     public void testDFSSingleElemnt() {
         SimpleGraph simpleGraph = new SimpleGraph(2);
