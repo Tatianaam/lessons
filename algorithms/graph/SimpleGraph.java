@@ -5,7 +5,6 @@ import java.util.*;
 class Vertex {
     public int Value;
     public boolean hit;
-
     public Vertex(int val) {
         Value = val;
     }
@@ -50,6 +49,36 @@ class SimpleGraph {
     public void RemoveEdge(int v1, int v2) {
         m_adjacency[v1][v2] = 0;
         m_adjacency[v2][v1] = 0;
+    }
+
+
+    public ArrayList<Vertex> WeakVertices() {
+        Set<Integer> temp = new HashSet<>();
+        clearHits();
+        for (int v = 0; v < vertex.length; v++) {
+            if (vertex[v].hit) continue;
+            ArrayList<Integer> check = new ArrayList<>();
+            for (int i = 0; i < vertex.length; i++)
+                if (m_adjacency[v][i] == 1)
+                    check.add(i);
+
+            if (check.size() > 1)
+                for (int i = 0; i < check.size() - 1; i++)
+                    for (int j = i + 1; j < check.size(); j++)
+                        if (m_adjacency[check.get(i)][check.get(j)] == 1) {
+                            vertex[check.get(i)].hit = true;
+                            vertex[check.get(j)].hit = true;
+                            vertex[v].hit = true;
+                            temp.add(check.get(i));
+                            temp.add(check.get(j));
+                            temp.add(v);
+                        }
+
+        }
+        ArrayList<Vertex> result = new ArrayList<>();
+        for (int i = 0; i < vertex.length; i++)
+            if (!temp.contains(i)) result.add(vertex[i]);
+        return result;
     }
 
     public ArrayList<Vertex> DepthFirstSearch(int VFrom, int VTo) {

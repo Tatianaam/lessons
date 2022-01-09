@@ -7,6 +7,58 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 public class SimpleGraphTest {
+    @Test
+    public void testWeakNodesTwo() {
+        SimpleGraph simpleGraph = new SimpleGraph(5);
+        simpleGraph.AddVertex(0);
+        simpleGraph.AddVertex(1);
+        simpleGraph.AddVertex(2);
+        simpleGraph.AddVertex(3);
+        simpleGraph.AddVertex(4);
+        ArrayList<Vertex> result = simpleGraph.WeakVertices();
+        Assert.assertEquals(5, result.size());
+        simpleGraph.AddEdge(0, 1);
+        simpleGraph.AddEdge(0, 2);
+        simpleGraph.AddEdge(0, 3);
+        simpleGraph.AddEdge(0, 4);
+        simpleGraph.AddEdge(1, 2);
+        simpleGraph.AddEdge(2, 3);
+        simpleGraph.AddEdge(1, 4);
+        result = simpleGraph.WeakVertices();
+        Assert.assertEquals(0, result.size());
+    }
+
+    @Test
+    public void testWeakNodes() {
+        SimpleGraph simpleGraph = new SimpleGraph(9);
+        simpleGraph.AddVertex(0);
+        simpleGraph.AddVertex(1);
+        simpleGraph.AddVertex(2);
+        simpleGraph.AddVertex(3);
+        simpleGraph.AddVertex(4);
+        simpleGraph.AddVertex(5);
+        simpleGraph.AddVertex(6);
+        simpleGraph.AddVertex(7);
+        simpleGraph.AddVertex(8);
+        ArrayList<Vertex> result = simpleGraph.WeakVertices();
+        Assert.assertEquals(9, result.size());
+        simpleGraph.AddEdge(0, 1);
+        simpleGraph.AddEdge(0, 2);
+        simpleGraph.AddEdge(0, 3);
+        simpleGraph.AddEdge(1, 6);
+        simpleGraph.AddEdge(2, 3);
+        simpleGraph.AddEdge(2, 5);
+        simpleGraph.AddEdge(3, 5);
+        simpleGraph.AddEdge(3, 6);
+        simpleGraph.AddEdge(4, 6);
+        simpleGraph.AddEdge(6, 7);
+        simpleGraph.AddEdge(4, 7);
+        simpleGraph.AddEdge(7, 8);
+        result = simpleGraph.WeakVertices();
+        Assert.assertEquals(2, result.size());
+        Assert.assertEquals(1, result.get(0).Value);
+        Assert.assertEquals(8, result.get(1).Value);
+    }
 
     @Test
     public void testBFSOne() {
@@ -155,8 +207,8 @@ public class SimpleGraphTest {
         simpleGraph.AddEdge(2, 3);
         simpleGraph.AddEdge(3, 4);
         simpleGraph.AddEdge(3, 6);
-      //  simpleGraph.AddEdge(6, 5);
-      //  simpleGraph.AddEdge(4, 5);
+        //  simpleGraph.AddEdge(6, 5);
+        //  simpleGraph.AddEdge(4, 5);
         simpleGraph.AddEdge(7, 0);
         result = simpleGraph.DepthFirstSearch(7, 2);
         Assert.assertEquals(2, result.get(result.size() - 1).Value);
@@ -239,20 +291,20 @@ public class SimpleGraphTest {
         Assert.assertEquals(false, simpleGraph.IsEdge(0, 2));
         Assert.assertEquals(true, simpleGraph.IsEdge(1, 2));
         Assert.assertEquals(false, simpleGraph.IsEdge(2, 1));
-    //    Assert.assertEquals(true, simpleGraph.IsEdge(1, 0));
-     //   Assert.assertEquals(false, simpleGraph.IsEdge(2, 0));
+        //    Assert.assertEquals(true, simpleGraph.IsEdge(1, 0));
+        //   Assert.assertEquals(false, simpleGraph.IsEdge(2, 0));
 
         simpleGraph.AddEdge(0, 2);
-      //  Assert.assertEquals(true, simpleGraph.IsEdge(2, 1));
-     //   Assert.assertEquals(true, simpleGraph.IsEdge(1, 0));
-    //    Assert.assertEquals(true, simpleGraph.IsEdge(2, 0));
+        //  Assert.assertEquals(true, simpleGraph.IsEdge(2, 1));
+        //   Assert.assertEquals(true, simpleGraph.IsEdge(1, 0));
+        //    Assert.assertEquals(true, simpleGraph.IsEdge(2, 0));
 
         simpleGraph.RemoveVertex(0);
         Assert.assertEquals(null, simpleGraph.vertex[0]);
         Assert.assertEquals(false, simpleGraph.IsEdge(0, 1));
         Assert.assertEquals(false, simpleGraph.IsEdge(0, 2));
         Assert.assertEquals(true, simpleGraph.IsEdge(1, 2));
-      //  Assert.assertEquals(true, simpleGraph.IsEdge(2, 1));
+        //  Assert.assertEquals(true, simpleGraph.IsEdge(2, 1));
         Assert.assertEquals(false, simpleGraph.IsEdge(1, 0));
         Assert.assertEquals(false, simpleGraph.IsEdge(2, 0));
 
@@ -261,7 +313,7 @@ public class SimpleGraphTest {
         Assert.assertEquals(false, simpleGraph.IsEdge(0, 1));
         Assert.assertEquals(false, simpleGraph.IsEdge(0, 2));
         Assert.assertEquals(true, simpleGraph.IsEdge(1, 2));
-  //      Assert.assertEquals(true, simpleGraph.IsEdge(2, 1));
+        //      Assert.assertEquals(true, simpleGraph.IsEdge(2, 1));
         Assert.assertEquals(false, simpleGraph.IsEdge(1, 0));
         Assert.assertEquals(false, simpleGraph.IsEdge(2, 0));
 
