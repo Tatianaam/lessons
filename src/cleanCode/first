@@ -2,7 +2,7 @@ node - currentNode
 //текущий узел вместо просто узла
 
 count - totalAmountOfNodes
-//кол-во всех узлов в списке
+//кол-во всех узлов
 
 result - isRemoved
 //флаг удален элемент или нет
@@ -31,7 +31,7 @@ tempArr - bytesOfGivenKey
 temp - checkedSlotsCounter
 //кол-во проверенных слотов
 
-tempArr - pairsOfNonEmptySlotValuesAndIndexes
+tempArr - notEmptySlotsValueIndexPairs
 //массив пар значение - индекс не пустых слотов
 
 
