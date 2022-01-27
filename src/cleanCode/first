@@ -1,0 +1,39 @@
+node - currentNode
+//текущий узел вместо просто узла
+
+count - totalAmountOfNodes
+//кол-во всех узлов в списке
+
+result - isRemoved
+//флаг удален элемент или нет
+
+temp - allWeakVerticesIndexes
+// сет значений индексов всех слабых вершин
+
+check - indexesOfVerticesWithEdges
+// лист индексов вершин, у которых есть ребра (связи с другими вершинами)
+
+queue - nodesToBeChecked
+// очередь узлов, которые нужно проверить
+
+tempFrom - currentNode
+//текущий (рассматриваемый узел)
+
+result - hashValue
+//хэш значение
+
+temp - indexOfAvailableSlot
+//индекс свободного слота
+
+tempArr - bytesOfGivenKey
+// битовый массив данного ключа
+
+temp - checkedSlotsCounter
+//кол-во проверенных слотов
+
+tempArr - pairsOfNonEmptySlotValuesAndIndexes
+//массив пар значение - индекс не пустых слотов
+
+
+
+
