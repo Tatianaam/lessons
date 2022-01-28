@@ -1,0 +1,30 @@
+6.1.
+count - hitsCounter
+
+boolean strToIntTry - parkInputActive
+
+inputChoice - selectedParkID
+
+sumOfTransactions - totalDailySales
+
+sleepTime - userMinutesSlept
+
+
+6.2.
+tempArr - stringByteArray
+
+matrix - имя двумерного массива, хранящего информацию по связям
+
+acknowledgement/ack
+
+request/response
+
+
+6.3.
+generalAverageDistance, userAverageDistance
+
+amountOfSteps вместо distance в контексте функции выводящей значение шагов для пользователя
+
+externalProcessID & internalProcessID вместо referenceID & processID (проще забыть что именно было в reference в этом месте)
+
+6.4
