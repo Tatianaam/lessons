@@ -27,4 +27,15 @@ amountOfSteps вместо distance в контексте функции выв�
 
 externalProcessID & internalProcessID вместо referenceID & processID (проще забыть что именно было в reference в этом месте)
 
+
 6.4
+check - verticesToCheck
+
+temp - strongVertices
+
+nodes - allNodesInTree
+
+accountToCustomerRelationship - accToCustmRlshp
+
+transactionProcessEntityIdentifier - tranPrcsEntityID
+
