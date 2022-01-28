@@ -2,13 +2,13 @@ node - currentNode
 //текущий узел вместо просто узла
 
 count - totalAmountOfNodes
-//кол-во всех узлов в списке
+//кол-во всех узлов
 
 result - isRemoved
 //флаг удален элемент или нет
 
 temp - allWeakVerticesIndexes
-// сет значений индексов всех слабых вершин
+// индексы всех слабых вершин
 
 check - indexesOfVerticesWithEdges
 // лист индексов вершин, у которых есть ребра (связи с другими вершинами)
@@ -29,11 +29,7 @@ tempArr - bytesOfGivenKey
 // битовый массив данного ключа
 
 temp - checkedSlotsCounter
-//кол-во проверенных слотов
+//счетчик проверенных слотов
 
-tempArr - pairsOfNonEmptySlotValuesAndIndexes
-//массив пар значение - индекс не пустых слотов
-
-
-
-
+tempArr - notEmptySlotsValueIndexPairs
+//массив пар: значение - индекс для не пустых слотов
