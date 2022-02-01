@@ -1,0 +1,44 @@
+7.1.
+strToIntTry - notCorrectParkID
+
+parkMenuFlag - isInParkMenu
+
+startRun - inProgress
+
+strToLongTry - notValidSiteId
+
+temp - validName
+
+7.2.
+flag - notFound
+
+dateTry - success
+
+7.3.
+        for (int current = 0; current < vertex.length; current++) {
+            if (vertex[current].hit) continue;
+              ...
+            for (int neighbour = 0; i < vertex.length; neighbour++)
+                if (m_adjacency[current][neighbour] == 1)
+                    check.add(neighbour);
+
+7.4.
+    // использование start/end
+
+    private static void helper(int[] a, int[] result, int i, int start, int end) {
+        if (start > end || i >= a.length) return;
+        int temp = (end - start) / 2 + start;
+        result[i] = a[temp];
+        helper(a, result, 2 * i + 1, start, temp);
+        helper(a, result, 2 * i + 2, temp+1, end);
+    }
+
+
+7.5.
+
+из 7.4: i & temp поменять на current & middle
+
+tempFrom - currentNode
+
+temp - initialArrayClone
+
