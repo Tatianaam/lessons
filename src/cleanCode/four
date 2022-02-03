@@ -1,0 +1,29 @@
+ModelMap m - displayedAttributes
+
+tempString1 - siteAccessibility
+
+tempString2 - siteHasUtilities
+
+dateTry - dateNotSelected
+
+max - maxChildElement
+
+boolean productPublishStatus - productPublished
+
+boolean updateProductPutStatus - productUpdated
+
+boolean dateFlagEnabled - isValidDate
+
+ArrayList result - missingMandatoryFields
+
+ProductDirectoryEntryRatesController - ratesProductDirController
+
+ProductDirectoryEntryUpdateController - updateProductDirController
+
+accountNum - accountID
+
+
+
+
+
+
