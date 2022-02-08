@@ -6,7 +6,7 @@ reservationSearchParkWide() - findMakeReservationParkWide()
 
 reservationSearchHelperMethod() - findMakeReservationInSelectedSite()
 
-getAllYelp() - getAllPlacesByPlaceAndItem()
+getAllYelp() - getAllPlacesByLocationAndItem()
 
 stockInventory() - stockInventoryFromFile()
 
