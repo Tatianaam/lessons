@@ -2,8 +2,8 @@
 FeeException ex = FeeException.fromThrowable(Throwable cause);
 FeeException ex = FeeException.fromMessage(String message);
 
-Instant startDate = MappingUtils.getLendingProductStartDate(LendingProduct product); //not getStartDate
-Instant startDate = MappingUtils.getDepositProductStartDate(DepositProduct product);
+Instant startDate = MappingUtils.getLendingProductStartDateByStatus(LendingProduct product, String status); //not getStartDate
+Instant startDate = MappingUtils.getDepositProductStartDateByStatus(DepositProduct product, String status);
 
 ProductEntity entity = Util.createEntityFromStudentProduct(StudentLendingProduct product);
 ProductEntity entity = Util.createEntityFromHomeEquityProduct(HomeEquityLendingProduct product);
