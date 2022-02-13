@@ -1,0 +1,23 @@
+private int quantity = 5 - public static final int MAX_QUANTITY  //переменная должна была быть константой, более точное описание
+
+25 - public static final int QUARTER  //просто цифры в коде должны быть константами (номиналы монет)
+
+10 - public static final int DIME  // номинал монет
+
+5 - public static final int NICKEL // номинал монет
+
+"Campground" - public static final CAMPGROUND //константа вместо просто строки
+
+"yes" - public static final String YES_USER_INPUT // константа вместо просто строки
+
+"no" - public static final String NO_USER_INPUT // константа вместо просто строки
+
+16 - public static final int MIN_REQUIRED_SIZE // константа вместо просто цифры
+
+"PLOC" - public static final String PLOC // константа вместо просто строки
+
+"PLOC" - public static final String PLOC_TYPE // константа вместо просто строки
+
+"StartDate" - pubic static final String START_DATE_STRING // константа вместо просто строки
+
+"EndDate" - pubic static final String END_DATE_STRING // константа вместо просто строки
