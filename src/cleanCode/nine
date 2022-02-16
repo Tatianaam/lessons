@@ -1,0 +1,54 @@
+ //add check before casting even if other class never expected
+if (account.getField() instanceof ConsumerLoan)               
+     methodCall((ConsumerLoan) account.getField())
+
+// unicode char instead of symbol
+char c = '>' 
+charc c = 62    
+
+// instead of calculations with doubles change the class field to int, do everything in ints, only for printing output add /100.00,  changed in several places
+int i = d * 100
+....
+System.out.println("Info....." + i / 100.00);
+
+//adding null check if working with Double
+if (doubleValue != null && doubleValue.equlas(otherValue))
+     ...
+     
+//using method to get double when intially receiveing a Double
+double value = receivedDouble.getDoubleValue();
+
+//complex condition simplified, variables renamed
+if (productPublishStatus && (!processFeePlan || feePlanPublishStatus) && (!processRatePlan || ratePlanPostStatus) && (!processUpdateProduct || updateProductStatus))
+
+//changed to
+boolean isFeePlanProcessedPublished = !isToProcessFeePlan || feePlanPublishStatus
+boolean isRatePlanProcessedPosted = !isTrocessRatePlan || ratePlanPostStatus
+boolean isPrdctUpdateProcessedPosted = !processUpdateProduct || updateProductStatus
+if (isProductPublished && isFeePlanProcessedPublished && isRatePlanProcessedPosted && isPrdctUpdateProcessedPosted)
+
+
+//complex condition simplified
+if (optionalAccEntity.ispresent() != null && processEntity.getPartition().equals(String.valueof(partition)) && processentity.getKafkaOffset().equals(String.valueOf(offset)) && Util.PUBLISHED.equalsIgnoreCase(processEntity.getStatus())) 
+
+//changed to
+boolean isSameOffsetAndPartition = processEntity.getPartition().equals(String.valueof(partition)) && processentity.getKafkaOffset().equals(String.valueOf(offset));
+boolean isPublished = Util.PUBLISHED.equalsIgnoreCase(processEntity.getStatus());
+if (optionalAccEntity.ispresent() != null && isSameOffsetAndPartition && isPublished) 
+..........
+
+//adding variables to make code more readable
+if (((ConsumerLoan) account.getAccount()).getAccountInvolvements() != null && ((ConsumerLoan) account.getAccount()).getAccountArrangement() != null) {
+   account.getAccount()).getAccountInvolvements().stream().filter(......)
+   .......
+   //more code with arrangement 
+}
+
+//changed to
+List<AccountInvolvement> accountInvolvements = ((ConsumerLoan) account.getAccount()).getAccountInvolvements();
+AccountArrangement accArrangement = ((ConsumerLoan) account.getAccount()).getAccountArrangement();
+
+if (accountInvolvements != null && accArrangement != null){
+   accountInvolvements.stream........
+}
+
