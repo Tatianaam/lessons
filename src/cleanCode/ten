@@ -1,0 +1,79 @@
+// initialization of result moved closer to where it is used instead of beginning
+for (...){
+.....
+}
+ArrayList <Integer> result = new ArrayList<>();
+for (...)
+   result.add(...)
+return result;
+
+// validation added as a part of "get" method, instead of doing it as default case
+while (purchaseMenu) {
+
+		vm.menu.printPurchaseMenu(vm.money);
+
+		int inputP = vm.menu.getAndValidateMenuNumberInput();
+
+		switch (inputP) {
+			case 1:
+			    vm.menu.feedMoneyTransaction(vm.money);
+			    break;
+			case 2:
+				vm.menu.selectProduct(vm);
+				break;
+			case 3:
+				vm.menu.finishTransaction(vm.money);;
+				purchaseMenu = false;
+				break;
+	}
+}
+
+// constants instead of strings, that are used often
+"yes" - public static final String YES_USER_INPUT
+
+"no" - public static final String NO_USER_INPUT
+
+//finished working with variable, by assigning "error" value
+while (getFile.hasNextLine()) {
+	String line = getFile.nextLine();
+	String[] product = line.split("\\|");
+	line = "ERROR";
+	.......
+	}
+
+
+//effectively final variable needed for streaming created right before stream, not in the code above
+String currentProductEntityStatus = util.get......();
+......
+String finalCurrentProductEntityStatus = currentProductEntityStatus;
+templates.stream().filter(template -> processProductUpdate(finalCurrentProductEntityStatus, .....)
+
+
+//variable moved to before the place where it is used instead of beginning of the method
+
+boolean isProductPublished = false;
+isProductPublished = util.publish.......();
+
+boolean feePlanPublishStatus = false;
+feePlanPublishStatus = util.publish.....();
+
+//set variables value to null after finishing work with it
+RateType rateDefType = rateDefRepository.get.....();
+...... // logic
+rateDefType = null;
+
+RateDefPlanMappingEntity rateDefPlanMappingEntity = RateDefPlanMappingRepo.get...();
+...... // logic
+rateDefPlanMappingEntity = null;
+
+//instead of setting every field, adding all args constructor - made sure nothing got missed
+
+Park park = new Park();
+park.setPark_id(rowSet.getLong("park_id"));
+park.setName(rowSet.getString("name"));
+......
+return park;
+
+return new Park(rowSet.getLong("park_id"), rowSet.getLong("name"), ......);
+
+
