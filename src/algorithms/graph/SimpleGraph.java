@@ -5,6 +5,7 @@ import java.util.*;
 class Vertex {
     public int Value;
     public boolean hit;
+
     public Vertex(int val) {
         Value = val;
     }
@@ -73,11 +74,52 @@ class SimpleGraph {
                             temp.add(check.get(j));
                             temp.add(v);
                         }
-
         }
         ArrayList<Vertex> result = new ArrayList<>();
         for (int i = 0; i < vertex.length; i++)
             if (!temp.contains(i)) result.add(vertex[i]);
+        return result;
+    }
+
+    public ArrayList<Vertex> WeakVerticesRefactored() {
+        Set<Integer> strongVrts = new HashSet<>();
+        clearHits();
+        for (int currentVrt = 0; currentVrt < vertex.length; currentVrt++) {
+            if (vertex[currentVrt].hit) continue;
+            ArrayList<Integer> neighborsToCheck = addNeighborsToList(currentVrt);
+            if (neighborsToCheck.size() > 1)
+                for (int first = 0; first < neighborsToCheck.size() - 1; first++)
+                    for (int second = first + 1; second < neighborsToCheck.size(); second++)
+                        addToStrongIfConnected(first, second, currentVrt, strongVrts, neighborsToCheck);
+        }
+        return getWeakVerticies(strongVrts);
+    }
+
+    private void addToStrongIfConnected(int first, int second, int currentVrt,
+                                       Set<Integer> strongVrts, ArrayList<Integer> neighborsToCheck) {
+
+        if (m_adjacency[neighborsToCheck.get(first)][neighborsToCheck.get(second)] == 1) {
+            vertex[neighborsToCheck.get(first)].hit = true;
+            vertex[neighborsToCheck.get(second)].hit = true;
+            vertex[currentVrt].hit = true;
+            strongVrts.add(neighborsToCheck.get(first));
+            strongVrts.add(neighborsToCheck.get(second));
+            strongVrts.add(currentVrt);
+        }
+    }
+
+    private ArrayList<Integer> addNeighborsToList(int currentVrtx) {
+        ArrayList<Integer> check = new ArrayList<>();
+        for (int i = 0; i < vertex.length; i++)
+            if (m_adjacency[currentVrtx][i] == 1)
+                check.add(i);
+        return check;
+    }
+
+    private ArrayList<Vertex> getWeakVerticies(Set<Integer> strongVrts) {
+        ArrayList<Vertex> result = new ArrayList<>();
+        for (int i = 0; i < vertex.length; i++)
+            if (!strongVrts.contains(i)) result.add(vertex[i]);
         return result;
     }
 

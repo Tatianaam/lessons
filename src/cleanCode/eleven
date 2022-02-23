@@ -1,0 +1,93 @@
+//refactored WeakVertices() method
+//broken down (helper methods created), regrouped, methods & variables renamed
+
+  public ArrayList<Vertex> WeakVerticesRefactored() {
+        clearHits();
+        Set<Integer> strongVrts = new HashSet<>();
+        for (int currentVrt = 0; currentVrt < vertex.length; currentVrt++) {
+            if (vertex[currentVrt].hit) continue;
+            ArrayList<Integer> neighborsToCheck = addNeighborsToList(currentVrt);
+            if (neighborsToCheck.size() > 1)
+                for (int first = 0; first < neighborsToCheck.size() - 1; first++)
+                    for (int second = first + 1; second < neighborsToCheck.size(); second++)
+                        addToStrongIfConnected(first, second, currentVrt, strongVrts, neighborsToCheck);
+        }
+        return getWeakVerticies(strongVrts);
+    }
+
+    private void addToStrongIfConnected(int first, int second, int currentVrt,
+                                       Set<Integer> strongVrts, ArrayList<Integer> neighborsToCheck) {
+
+        if (m_adjacency[neighborsToCheck.get(first)][neighborsToCheck.get(second)] == 1) {
+            vertex[neighborsToCheck.get(first)].hit = true;
+            vertex[neighborsToCheck.get(second)].hit = true;
+            vertex[currentVrt].hit = true;
+            strongVrts.add(neighborsToCheck.get(first));
+            strongVrts.add(neighborsToCheck.get(second));
+            strongVrts.add(currentVrt);
+        }
+    }
+
+    private ArrayList<Integer> addNeighborsToList(int currentVrtx) {
+        ArrayList<Integer> check = new ArrayList<>();
+        for (int i = 0; i < vertex.length; i++)
+            if (m_adjacency[currentVrtx][i] == 1)
+                check.add(i);
+        return check;
+    }
+
+    private ArrayList<Vertex> getWeakVerticies(Set<Integer> strongVrts) {
+        ArrayList<Vertex> result = new ArrayList<>();
+        for (int i = 0; i < vertex.length; i++)
+            if (!strongVrts.contains(i)) result.add(vertex[i]);
+        return result;
+    }
+
+
+// GetMax() refactored
+// broken down, variables & methods renamed
+
+ public int GetMaxRefactored() {
+        if (this.HeapArray == null || this.HeapArray[0] == -1) return -1;
+
+        int newMax = getLastElementIndex();
+        int max = this.HeapArray[0];
+        this.HeapArray[0] = this.HeapArray[newMax];
+        HeapArray[newMax] = -1;
+        restructure();
+
+        return max;
+    }
+
+    private void restructure(){
+        for (int current = 0; depth != 0 && current <= this.HeapArray.length - Math.pow(2, depth); ) {
+            int left = 2 * current + 1;
+            int right = 2 * current + 2;
+            int max = this.HeapArray[left] > this.HeapArray[right] ? left : right;
+            if (HeapArray[current] < HeapArray[max]) {
+                int swap = HeapArray[current];
+                HeapArray[current] = HeapArray[max];
+                HeapArray[max] = swap;
+                current = max;
+            } else
+                break;
+        }
+    }
+
+    private int getLastElementIndex() {
+        int lastElmIndex = -1;
+        for (int i = this.HeapArray.length - 1; i >= 0; i--)
+            if (this.HeapArray[i] != -1) {
+                lastElmIndex = i;
+                break;
+            }
+        return lastElmIndex;
+    }
+
+
+// in EvenTrees initialization can be changed
+int count = 0;
+count = getNumberOfNodes(count, matrix, i, nodes);
+
+int count = getNumberOfNodes(0, matrix, i, nodes);
+

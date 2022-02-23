@@ -147,6 +147,36 @@ class SimpleTree<T> {
         return result;
     }
 
+    public ArrayList<T> EvenTreesRefactored() {
+        if (this.Root == null || this.Root.Children == null || this.Root.Children.isEmpty()) return new ArrayList<>();
+        List<SimpleTreeNode<T>> nodes = GetAllNodes();
+        if (nodes.size() % 2 == 1) return new ArrayList<>();
+
+        boolean[][] matrix = getMatrix(new boolean[nodes.size()][nodes.size() + 1], nodes);
+        ArrayList<T> result = new ArrayList<>();
+        for (int i = nodes.size() - 1; i > 0; i--) {
+            if (nodes.get(i).checked) continue;
+            int count = 0;
+            count = getNumberOfNodes(count, matrix, i, nodes);
+            if (count != 0) {
+                count++;
+                int temp = i;
+                while (count % 2 == 1) {
+                    if (temp == 0) break;
+                    nodes.get(temp).checked = true;
+                    temp = nodes.indexOf(nodes.get(temp).Parent);
+                    count = getNumberOfNodes(count, matrix, temp, nodes);
+                    count++;
+                }
+                nodes.get(temp).checked = true;
+                if (temp == 0) continue;
+                result.add(nodes.get(temp).Parent.NodeValue);
+                result.add(nodes.get(temp).NodeValue);
+            }
+        }
+        return result;
+    }
+
     private int getNumberOfNodes(int count, boolean[][] matrix, int i, List<SimpleTreeNode<T>> nodes) {
         if (!matrix[i][matrix.length])
             for (int j = 0; j < matrix.length; j++) {
