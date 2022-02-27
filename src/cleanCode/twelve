@@ -1,0 +1,47 @@
+// list with product codes is loaded once when service starts
+// instead of querying db every time a fee needs to be processed
+
+class InitConfig {
+   @Bean
+   public List<String> productCodes(){
+      ...
+      return codes;
+   }
+}
+
+class FeeService {
+   @Autowired
+   private List<String> productCodes;
+   ...
+}
+
+
+// constant that's frequently used to validate certain field
+// according to requirements will never change, so doesn't need to be configurable
+
+public static final String RELATIONSHIP_TYPE = "F-N";
+
+
+// 25, 10, 5 - just numbers used, can be moved to constants
+// denomination will never change, this method is the only place where it is used
+// method is rarely called
+
+public String giveChange() {
+		int money = balance;
+		if (money == 0) {
+			System.out.println("No Change.");
+			return "No Change.";
+		}
+
+		int quarters = 0;
+		int dimes = 0;
+		int nickels = 0;
+
+		quarters = money / 25;
+		money = money % 25;
+
+		dimes = money / 10;
+        money = money % 10;
+		........
+}
+
