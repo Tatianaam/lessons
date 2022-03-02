@@ -1,1 +1,82 @@
+// array list replaced with queue in weakVerticies
+
+            Queue<Integer> check = new Queue<Integer>();
+            for (int i = 0; i < vertex.length; i++)
+                if (m_adjacency[v][i] == 1)
+                    check.add(i);
+
+            if (check.size() > 1)
+                for (int i = 0; i < check.size() - 1; i++)
+                    for (int j = i + 1; j < check.size(); j++)
+                        if (m_adjacency[check.get(i)][check.get(j)] == 1) {
+                            vertex[check.get(i)].hit = true;
+                            vertex[check.get(j)].hit = true;
+                            vertex[v].hit = true;
+                            temp.add(check.get(i));
+                            temp.add(check.get(j));
+                            temp.add(v);
+                        }
+
+// new version
+
+            Queue<Integer> check = new Queue<Integer>();
+            for (int i = 0; i < vertex.length; i++)
+                if (m_adjacency[v][i] == 1)
+                    check.enqueue(i);
+
+            while (check.size() > 1) {
+                int firstElm = check.dequeue();
+                int secondElm = check.dequeue();
+                if (m_adjacency[firstElm][secondElm] == 1) {
+                    vertex[firstElm].hit = true;
+                    vertex[secondElm].hit = true;
+                    vertex[v].hit = true;
+                    temp.add(firstElm);
+                    temp.add(secondElm);
+                    temp.add(v);
+                }
+
+
+
+
+
+
+
+// wide All nodes without direct indexes
+
+    public ArrayList<BSTNode> WideAllNodes1() {
+        ArrayList<BSTNode> result = new ArrayList<>();
+        if (this.Root != null) {
+            result.add(this.Root);
+            for (int i = 0; i < result.size(); i++) {
+                if (result.get(i).LeftChild != null) result.add(result.get(i).LeftChild);
+                if (result.get(i).RightChild != null) result.add(result.get(i).RightChild);
+            }
+        }
+        return result;
+    }
+
+// new version - not sure if it really makes sense to get rid of using indexes here, but did as an exercise
+
+    public ArrayList<BSTNode> WideAllNodes() {
+        ArrayList<BSTNode> result = new ArrayList<>();
+        Queue<BSTNode> temp = new Queue<>();
+        if (this.Root != null) {
+            result.add(this.Root);
+            temp.enqueue(this.Root);
+            while (temp.size()!=0) {
+                if (temp.peek().LeftChild != null) {
+                    result.add(temp.peek().LeftChild);
+                    temp.enqueue(temp.peek().LeftChild);
+                }
+                if (temp.peek().RightChild != null) {
+                    result.add(temp.peek().RightChild);
+                    temp.enqueue(temp.peek().RightChild);
+                }
+                temp.dequeue();
+            }
+        }
+        return result;
+    }
+
 
