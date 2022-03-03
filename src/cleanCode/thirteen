@@ -37,9 +37,8 @@
                 }
 
 
-
-
-
+// Using Sextet <Date, Date....> startEndDates
+// instead of Date [6] to avoid indexes
 
 
 // wide All nodes without direct indexes
