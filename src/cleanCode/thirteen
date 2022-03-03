@@ -26,7 +26,7 @@
 
             while (check.size() > 1) {
                 int firstElm = check.dequeue();
-                int secondElm = check.dequeue();
+                int secondElm = check.peek();
                 if (m_adjacency[firstElm][secondElm] == 1) {
                     vertex[firstElm].hit = true;
                     vertex[secondElm].hit = true;
