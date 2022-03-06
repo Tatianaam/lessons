@@ -1,0 +1,33 @@
+    // adjacency matrix with last column indicating if node has no children (true)
+        boolean[][] matrix = getMatrix(new boolean[nodes.size()][nodes.size() + 1], nodes);
+        ArrayList<T> result = new ArrayList<>();
+        for (int i = nodes.size() - 1; i > 0; i--) {
+            if (nodes.get(i).checked) continue;
+            int count = 0;
+            count = getNumberOfNodes(count, matrix, i, nodes);
+            if (count != 0) {
+                count++;
+                int temp = i;
+                //if subtree isn't even - step up to parent and check again
+                while (count % 2 == 1) {
+                    if (temp == 0) break;
+                    nodes.get(temp).checked = true;
+                    temp = nodes.indexOf(nodes.get(temp).Parent);
+                    count = getNumberOfNodes(count, matrix, temp, nodes);
+                    count++;
+                }
+
+
+
+// return true if reservation is ready to be inserted, false if any information is missing
+public static boolean checkingReservationInfo(Reservation reservation) {......}
+
+//return -1 if the user didnlt select any campground and wants to cancel, or selected campground id isn't valid
+public static long promptForCampgroundChoice(List<Campground> campgrounds) { .....}
+
+// key is process ID
+ Map<Long, ProcessEntity> processEntityMap =  new...
+// key is process ID
+ Map<Long, FeeEntity> feeEntityMap =  new...
+// key is external reference ID
+ Map<Long, ErrorDetails> errorDetailsMap = new ...
