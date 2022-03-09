@@ -1,0 +1,28 @@
+//прояснение
+//checking first value in quartet which indicates if entities are found
+ if (!isprocessedwithEntities.getValue0()) { ...... }
+
+//прояснение
+// adding opening and closing tags to be able to unmarshal into wrapper object
+sb.append(Constant.XML_GENERAL_LENDING_START);
+...
+sb.append(Constant.XML_GENERAL_LENDING_END);
+
+//switched comment to TODO
+//TODO change temporary hardcoded date to configurable
+
+//пояснение
+//check if start date is not in future and if start date is not in received date range
+
+//пояснение
+// move ack.acknowledge() to first line in method for local testing to avoid processing of the same message
+ack.acknowledge()
+
+//пояснение
+// get entity with attributes present in both types of accounts
+//always check process id field before saving
+public AccountEntity getAccountEntityBase(....){....}
+
+//switched comment to TODO
+//TODO update blocking codes enum after zafin march release
+
