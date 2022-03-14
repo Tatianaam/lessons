@@ -1,0 +1,7 @@
+// Usually don't write much comments for code, because most of the time it is clear
+// Few general comments on certain methods in classes, mostly added not because
+// of the complexity of the code, but to clarify information about objects/data that's given to work with
+
+//removed unused commented code
+
+//breaking large method into small ones for readability
